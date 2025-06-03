@@ -68,7 +68,7 @@ class BattleshipViewModel : ViewModel() {
     private val _isGameOver = MutableLiveData<Boolean>(false)
     val isGameOver: LiveData<Boolean> = _isGameOver
     
-    // Game won flag - we werent able to figure out how to use this properly for the winner
+    // Game won flag - we werent able to figure out how to use this properly for the winner, also was difficult due to server behaviour with the final post
     private val _isGameWon = MutableLiveData<Boolean>(false)
     val isGameWon: LiveData<Boolean> = _isGameWon
     
@@ -238,7 +238,7 @@ class BattleshipViewModel : ViewModel() {
                     // Always give turn to opponent after shooting
                     startPollingForEnemyMoves()
                     
-                    // Check for game over
+                    // Check for game over - but did not go along with the server behaviour with post command it has.
                     if (fireResponse.gameOver) {
                         _isGameWon.value = true
                         _shipSunkAnnouncement.value = "Congratulations! You won the game!"
@@ -255,7 +255,7 @@ class BattleshipViewModel : ViewModel() {
         }
     }
     
-    // to end the game - did not had time to make an game won value - jibin
+    // to end the game - jibin
     private fun endGame(endGame: Boolean) {
         if (endGame) {
             Log.d(TAG, "Game over")
