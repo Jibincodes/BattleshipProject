@@ -16,3 +16,21 @@ Key features of our game:
 - Server connection testing capability (for testing purposes, to quickly check whether the server is running).
 - Visual feedback for hits and misses
 - Game state persistence
+
+Visual representation of our game:
+
+![](images/1.png)
+
+Initially, the game will look like this when the emulator is running.
+
+![](images/2.png)
+
+The Start button would be enabled for players when the game key and player name have three letters and the ships have been placed in the grid using the Generate Ships button.
+
+![](images/3.png)
+
+When a player makes a move and hits an enemy ship, they are given information about whether they hit or sank the ship.
+
+![](images/4.png)
+
+Similarly, as shown in the above image, the other player/opponent would be notified that Player 1 hit their ship.
