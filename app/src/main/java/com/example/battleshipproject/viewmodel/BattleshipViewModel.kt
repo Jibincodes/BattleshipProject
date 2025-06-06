@@ -68,10 +68,6 @@ class BattleshipViewModel : ViewModel() {
     private val _isGameOver = MutableLiveData<Boolean>(false)
     val isGameOver: LiveData<Boolean> = _isGameOver
     
-    // Game won flag - we werent able to figure out how to use this properly for the winner, also was difficult due to server behaviour with the final post
-    private val _isGameWon = MutableLiveData<Boolean>(false)
-    val isGameWon: LiveData<Boolean> = _isGameWon
-    
     // Ships sunk
     private val _sunkenShips = MutableLiveData<List<String>>(emptyList())
     val sunkenShips: LiveData<List<String>> = _sunkenShips
@@ -240,8 +236,8 @@ class BattleshipViewModel : ViewModel() {
                     
                     // Check for game over - but did not go along with the server behaviour with post command it has.
                     if (fireResponse.gameOver) {
-                        _isGameWon.value = true
-                        _shipSunkAnnouncement.value = "Congratulations! You won the game!"
+                        val sunkShipsList = fireResponse.shipsSunk?.joinToString(", ") ?: "none"
+                        _shipSunkAnnouncement.value = "Game Over! You sunk: $sunkShipsList"
                         endGame(true)
                     }
                 }
@@ -295,8 +291,14 @@ class BattleshipViewModel : ViewModel() {
                 val response = result.getOrNull()
                 if (response != null) {
                     if (response.gameOver) {
-                        _isGameWon.value = false
-                        _shipSunkAnnouncement.value = "Game Over - You lost!"
+                        val yourSunkShips = _ships.value?.filter { ship ->
+                            ship.getAllPositions().all { pos ->
+                                _enemyShots.value?.any { shot -> 
+                                    shot.x == pos.x && shot.y == pos.y 
+                                } == true
+                            }
+                        }?.map { it.type }?.joinToString(", ") ?: "none"
+                        _shipSunkAnnouncement.value = "Game Over! Your sunk ships: $yourSunkShips"
                         endGame(true)
                     } else if (response.x != null && response.y != null) {
                         // Record enemy's shot
@@ -343,7 +345,6 @@ class BattleshipViewModel : ViewModel() {
         _errorMessage.value = null
         _isYourTurn.value = false
         _isGameOver.value = false
-        _isGameWon.value = false
         isFirstPlayer = false
         
         _yourShots.value = emptyList()

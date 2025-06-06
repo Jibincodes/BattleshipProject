@@ -451,7 +451,6 @@ fun GamePlayScreen(viewModel: BattleshipViewModel) {
 @Composable
 fun GameOverScreen(viewModel: BattleshipViewModel) {
     val isGameOver by viewModel.isGameOver.observeAsState(false)
-    val isGameWon by viewModel.isGameWon.observeAsState(false)
     val sunkenShips by viewModel.sunkenShips.observeAsState(emptyList())
     
     Column(
@@ -460,15 +459,15 @@ fun GameOverScreen(viewModel: BattleshipViewModel) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ) { //werent able to figure out a solution to display you won for the winner, but we settles down just to ship sinking, due to gameover boolean
+    ) {
         Text(
-            text = if (isGameWon) "You Won!" else "Game Over",
+            text = "Game Over",
             fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp),
-            color = if (isGameWon) Color(0xFF4CAF50) else Color.Red
+            color = Color.Red
         )
-        //clearly all 5 ships are stated for winner , hence it is clear for the winner
+        
         if (sunkenShips.isNotEmpty()) {
             Text(
                 text = "Ships you've sunk: ${sunkenShips.joinToString(", ")}",
