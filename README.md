@@ -25,7 +25,7 @@ Initially, the game will look like this when the emulator is running.
 
 ![](images/2.png)
 
-The Start button would be enabled for players when the game key and player name have three letters and the ships have been placed in the grid using the Generate Ships button.
+The Start button would be enabled for players when the game key and player name have three characters and the ships have been placed in the grid using the Generate Ships button.
 
 ![](images/3.png)
 
