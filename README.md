@@ -36,7 +36,7 @@ When a player makes a move and hits an enemy ship, they are given information ab
 Similarly, as shown in the above image, the other player/opponent would be notified that Player 1 hit their ship.
 
 ## Design
-The game follows the MVVM (Model-View-ViewModel) architecture pattern and was developed using Android practices discussed in lectures with Prof. Dr. Richard Bradley. Below is a breakdown of how the components work together:
+The game follows the MVVM (Model-View-ViewModel) architecture pattern and was developed using Android practices discussed in lectures with Prof. Dr. Bradley Richards. Below is a breakdown of how the components work together:
 
 1. **Models (`models/`)**
    - `Ship`: Represents the ship with type, position, and orientation
